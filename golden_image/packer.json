@@ -1,0 +1,60 @@
+{
+   "builders": [
+      {
+        "type": "amazon-ebs",
+        "ami_name": "Golden Image - {{timestamp}}",
+        "instance_type": "t2.micro",
+        "region": "{{user `region`}}",
+        "ssh_username": "ubuntu",
+        "source_ami_filter": {
+          "filters": {
+            "virtualization-type": "hvm",
+            "name": "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*",
+            "root-device-type": "ebs"
+          },
+          "most_recent": true,
+          "owners": ["099720109477"]
+        },
+        "ssh_pty": true,
+        "ami_description": "Golden Image built on {{isotime \"2006-01-02\"}}",
+        "run_tags": {
+          "Name": "{{user `name`}}"
+        },
+        "tags": {
+          "Date": "{{user `date`}}"
+        },
+        "ami_block_device_mappings": [
+          {
+            "device_name": "/dev/xvda",
+            "volume_type": "gp2",
+            "volume_size": 8,
+            "delete_on_termination": true
+          }
+        ]
+      }
+    ],
+    "provisioners": [
+      {
+        "type": "shell",
+        "inline": [
+          "export MANIFEST_PATH={{user `manifest_path`}}",
+          "sudo apt-get update",
+          "sudo apt-get install -y nginx",
+          "sudo sh -c 'echo \"Hello World at $(date -I)\" > /var/www/html/index.html'",
+          "sudo systemctl enable nginx",
+          "sudo systemctl start nginx"
+        ]
+      },
+      {
+        "type": "file",
+        "content": "{\"key\": \"value\"}",
+        "destination": "${MANIFEST_PATH}"
+      }
+    ],
+    "post-processors": [
+      {
+        "type": "manifest",
+        "output": "manifest.json"
+      }
+    ]
+  }
