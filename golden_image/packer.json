@@ -4,7 +4,7 @@
         "type": "amazon-ebs",
         "ami_name": "Golden Image - {{timestamp}}",
         "instance_type": "t2.micro",
-        "region": "{{user `region`}}",
+        "region": "us-west-2",
         "ssh_username": "ubuntu",
         "source_ami_filter": {
           "filters": {
@@ -16,12 +16,12 @@
           "owners": ["099720109477"]
         },
         "ssh_pty": true,
-        "ami_description": "Golden Image built on {{isotime \"2006-01-02\"}}",
+        "ami_description": "Golden Image built on {{isotime \"2023-05-22\"}}",
         "run_tags": {
-          "Name": "{{user `name`}}"
+          "Name": "my-golden-image"
         },
         "tags": {
-          "Date": "{{user `date`}}"
+          "Date": "2023-05-22"
         },
         "ami_block_device_mappings": [
           {

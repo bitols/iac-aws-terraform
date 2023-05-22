@@ -13,9 +13,6 @@ module "network" {
 # Módulo Golden_Image
 module "golden_image" {
   source = "./golden_image"
-  Region        = var.Region  
-  Name          = var.Image_Name
-  Date          = var.Image_Date
   Manifest_path = var.Image_Manifest_path
 
 }

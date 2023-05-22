@@ -1,7 +1,7 @@
 resource "null_resource" "packer_build" {
 
   provisioner "local-exec" {
-    command     = "packer build -var 'region=${var.Region}' -var 'name=${var.Name}' -var 'date=${var.Date}' -var 'manifest_path=${var.Manifest_path}' packer.json"
+    command     = "packer build -var 'manifest_path=${var.Manifest_path}' packer.json"
     working_dir = path.module
 
   }

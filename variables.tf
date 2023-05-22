@@ -14,14 +14,6 @@ variable "Region" {
     type = string
 }
 
-variable "Image_Name" {
-  type        = string
-}
-
-variable "Image_Date" {
-  type        = string
-}
-
 variable "Image_Manifest_path" {
   type        = string
 }
