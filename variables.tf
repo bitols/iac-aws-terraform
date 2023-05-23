@@ -17,3 +17,11 @@ variable "Region" {
 variable "Image_Manifest_path" {
   type        = string
 }
+
+variable "name" {
+  type        = string
+}
+
+variable "tags" {
+  type        = map(string)
+}
