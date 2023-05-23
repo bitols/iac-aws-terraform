@@ -18,10 +18,10 @@
         "ssh_pty": true,
         "ami_description": "Golden Image built on {{isotime \"2006-01-02\"}}",
         "run_tags": {
-          "Name": "{{user `name`}}"
+          "Name": "{{user 'name'}}"
         },
         "tags": {
-          "Date": "{{user `date`}}"
+          "Date": "{{user 'date'}}"
         },
         "ami_block_device_mappings": [
           {
